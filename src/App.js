@@ -52,6 +52,20 @@ const onSubmit = async (event) => {
 
 }
 
+const onClick = async () => {
+  const accounts = await web3.eth.getAccounts(); 
+
+  setMessage('Waiting on transaction success...');
+  await lottery.methods.pickWinner().send({
+    from: accounts[0]
+  })
+  
+
+  setMessage('A winner has been picked!');
+
+}
+
+
 
     return (
       <div className="App">
@@ -71,6 +85,10 @@ const onSubmit = async (event) => {
   </div>
   <button>Enter</button>
 </form>
+<hr />
+<h4>Ready to pick a winner?</h4>
+<button onClick={onClick}>Pick a Winner!</button>
+
 <hr />
 <h1>{message}</h1>
       </div>
